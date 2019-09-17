@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>JUEGO DE ACERTAR PREGUNTAS</title>
+	        <meta name="description" content="Ejemplo un juego de preguntas tipo trivial">
+
+<!-- Latest compiled and minified JS -->
+<script src="https://code.jquery.com/jquery.js"></script>
+
+
+</head>
+<body>
+<h1>BIENVENIDOS A SU JUEGO SOBRE LOCOMOCION: CORRECT ANSWER!</h1>
+
+
+	<div id="pregunta"></div>
+	<div id="respuestas"></div>
+
+<input type="button" value="Verificar Respuesta" onclick="comprobar()" color='red'>
+	<script>
+		var preguntas = [
+		           "¿Cómo se llama Capacidad que tienen las Personas y los animales para trasladarse de un lugar a otro?",
+
+                "Cómo se llama la fuerza que ejerce la tierra sobre un cuerpo y que influye en la locomoción?",
+
+                "Un delfin realiza su desplazamiento gracias a las aletas que tiene incorporadas en su cuerpo y para eso necisita estar en:",
+
+                "¿Cuáles son las extremedidades que necesita Carlos para trasladarse?"
+
+		];
+
+		var respuestas = [
+	             	["Locomoción","Comprar pasajes", "imaginación","Colomoción"],
+                ["Gravedad","Lealtad", "Supersayayin","Avengers"],
+                ["El agua","La tierra", "En el sol", "Aire"],
+                ["Las piernas","Las manos", "La cabeza", "El dorso"]
+		];
+jugar();
+
+		var indicie_respuesta_correcta;
+
+function jugar(){
+			var indice_aleatorio = Math.floor(Math.random()*preguntas.length);
+
+
+		var respuestas_posibles = respuestas[indice_aleatorio];
+
+
+		var posiciones = [0,1,2,3];
+		var respuestas_reordenadas = [];
+
+		var ya_se_metio = false;
+		for(i in respuestas_posibles){
+			var posicion_aleatoria = Math.floor(Math.random()*posiciones.length);
+			if(posicion_aleatoria==0 && ya_se_metio == false){
+				indicie_respuesta_correcta =i;
+				ya_se_metio = true;
+			}
+			respuestas_reordenadas[i] = respuestas_posibles[posiciones[posicion_aleatoria]];
+			posiciones.splice(posicion_aleatoria, 1);
+		}
+
+		var txt_respuestas="";
+		for(i in respuestas_reordenadas){
+			txt_respuestas += '<input type="radio" name="pp" value="'+i+'"><label>'+respuestas_reordenadas[i]+'</label><br>';
+		}
+
+		document.getElementById("respuestas").innerHTML = txt_respuestas;
+		document.getElementById("pregunta").innerHTML = preguntas[indice_aleatorio];
+
+}
+function comprobar(){
+	var respuesta = $("input[type=radio]:checked").val();
+
+	//alert(respuesta);
+	//alert(indicie_respuesta_correcta);
+	if(respuesta ==indicie_respuesta_correcta){
+		alert("ADIVINÉ!!">);
+	}else{
+		alert("ME TIRO DE UN PUENTE!");
+	}
+	jugar();
+}
+	</script>
+
+</body><br><br><br>
+<footer textalign="center">Realizado por Camilo Andrés Brango y José Higinio Álvarez</footer>
+</html>
